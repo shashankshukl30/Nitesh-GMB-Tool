@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Connect2Click — design tokens
+   --------------------------------------------------------------------------
+   REBRANDING THIS TOOL: everything visual is driven by the variables in the
+   :root block below. Change --color-accent (+ its two soft variants) and the
+   two font families, and the whole product re-skins. Nothing else needs to be
+   touched. The semantic score colours (green/amber/red) should stay as they
+   are — they carry meaning in the report, not brand.
+
+   The register is deliberately EDITORIAL rather than dashboard-SaaS: warm
+   paper ground, a display serif for headings, a single saturated accent. The
+   product's output is a report, so it should read like one — and it stays
+   legible when printed to PDF, which is how these reports get shared.
+   ========================================================================== */
+
+@theme inline {
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  /* Ground — warm paper, never pure white */
+  --color-bg: oklch(0.985 0.006 85);
+  --color-bg-2: oklch(0.962 0.009 85);
+  --color-surface: oklch(0.997 0.002 85);
+
+  /* Ink — warm near-black, never pure black */
+  --color-ink: oklch(0.23 0.02 62);
+  --color-ink-2: oklch(0.34 0.018 62);
+  --color-ink-3: oklch(0.45 0.015 62);
+  --color-muted: oklch(0.56 0.012 62);
+  --color-muted-2: oklch(0.66 0.01 62);
+
+  /* Structure */
+  --color-border: oklch(0.925 0.008 80);
+  --color-border-2: oklch(0.875 0.011 80);
+
+  /* Brand accent — deep vermilion. The one saturated colour in the system. */
+  --color-accent: oklch(0.545 0.176 33);
+  --color-accent-soft: oklch(0.958 0.028 40);
+  --color-accent-line: oklch(0.895 0.052 38);
+
+  /* Semantic — score meaning, not brand. Leave these alone when rebranding. */
+  --color-green: oklch(0.515 0.128 155);
+  --color-green-soft: oklch(0.952 0.038 155);
+  --color-red: oklch(0.532 0.187 26);
+  --color-red-soft: oklch(0.955 0.034 26);
+  --color-teal: oklch(0.545 0.088 190);
+  --color-amber: oklch(0.615 0.137 70);
+  --color-amber-soft: oklch(0.957 0.048 80);
+  --color-yellow: oklch(0.715 0.148 85);
+  --color-yellow-soft: oklch(0.962 0.058 90);
+
+  --radius-card: 14px;
+}
+
+/* Tailwind v4 needs the tokens registered to generate utilities from them. */
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-ink: var(--color-ink);
+  --color-accent: var(--color-accent);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Buttons inherit colour by default in most resets; every button in this app
+   that sits on a dark ground sets its colour inline for that reason. */
+button {
+  font-family: inherit;
+}
+
+/* ── Primitives ───────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.input {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-2);
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  font-size: 13.5px;
+  color: var(--color-ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--color-muted-2);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+}
+
+/* Visible focus for keyboard users on every interactive element. */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Motion ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Print — reports get saved to PDF and emailed ─────────────────────── */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .card {
+    break-inside: avoid;
+    border-color: #ddd;
+  }
+}

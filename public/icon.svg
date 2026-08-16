@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Connect2Click">
+  <rect width="64" height="64" rx="14" fill="oklch(0.545 0.176 33)"/>
+  <!-- Map pin fused with a cursor arrow: found, then clicked. -->
+  <path d="M32 13c-7.7 0-14 6.2-14 13.9 0 9.9 12.3 22.4 13 23.1a1.4 1.4 0 0 0 2 0c.7-.7 13-13.2 13-23.1C46 19.2 39.7 13 32 13Z" fill="#fff" opacity="0.22"/>
+  <path d="M25.5 22.4a1.1 1.1 0 0 1 1.5-1.4l16.2 8.4a1.1 1.1 0 0 1-.1 2l-6.7 2.5-3.1 6.5a1.1 1.1 0 0 1-2-.1Z" fill="#fff"/>
+</svg>
