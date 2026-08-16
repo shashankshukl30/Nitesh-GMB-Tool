@@ -221,8 +221,9 @@ export function Report({ result }: { result: GmbResult }) {
           {CONTACT_URL && (
             <a
               href={CONTACT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              // An on-site contact page opens in place; an external WhatsApp or
+              // booking link opens in a new tab so the report isn't lost.
+              {...(CONTACT_URL.startsWith("/") ? {} : { target: "_blank", rel: "noopener noreferrer" })}
               className="no-print shrink-0 rounded-full px-4 py-2 text-[12.5px] font-semibold transition hover:-translate-y-px hover:shadow-lg"
               style={{ background: "var(--color-surface)", color: "var(--color-ink)" }}
             >

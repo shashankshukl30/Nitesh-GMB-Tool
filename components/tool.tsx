@@ -1,20 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import type { GmbResult } from "@/lib/gmb/types";
 import type { BattlecardResult } from "@/lib/gmb/battlecard";
 import { Report } from "./report";
 import { BattlecardView } from "./battlecard-view";
-import { BRAND } from "@/lib/site";
-
-// A reload should land at the top of the page, not wherever the visitor had
-// scrolled to in a previous report. Set at module scope so it applies before
-// the browser restores position.
-if (typeof window !== "undefined") {
-  window.history.scrollRestoration = "manual";
-}
+import { SiteHeader, SiteFooter } from "./site-chrome";
 
 type Mode = "profile" | "competitors";
 
@@ -119,27 +111,7 @@ export default function Tool() {
 
   return (
     <div className="min-h-dvh">
-      {/* ── Masthead ─────────────────────────────────────────────────── */}
-      <header className="border-b border-[var(--color-border)]">
-        <div className="mx-auto flex max-w-6xl items-baseline gap-3 px-5 py-4 md:px-8">
-          {/* Next no-ops a Link to the route you're already on, so the brand
-              would do nothing on the only page this app has. Handle the
-              same-route click ourselves and scroll to top. */}
-          <Link
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
-            }}
-            aria-label={`${BRAND.name} — back to top`}
-            className="font-[family-name:var(--font-display)] text-[19px] font-semibold tracking-tight text-[var(--color-ink)] transition-opacity hover:opacity-70"
-          >
-            Connect<span style={{ color: "var(--color-accent)" }}>2</span>Click
-          </Link>
-          <span className="hidden text-[11px] text-[var(--color-muted)] sm:inline">{BRAND.tagline}</span>
-          <span className="ml-auto text-[11px] text-[var(--color-muted-2)]">Free · no signup</span>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto max-w-6xl px-5 pb-20 md:px-8">
         {/* ── Hero — asymmetric, editorial ───────────────────────────── */}
@@ -280,16 +252,7 @@ export default function Tool() {
         </AnimatePresence>
       </main>
 
-      <footer className="border-t border-[var(--color-border)]">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-6 text-[11px] text-[var(--color-muted-2)] md:px-8">
-          <span>
-            Data from the Google Places API. No account, no email captured, nothing stored.
-          </span>
-          <span>
-            © {new Date().getFullYear()} {BRAND.name}
-          </span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

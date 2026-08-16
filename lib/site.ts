@@ -17,14 +17,25 @@ export const BRAND = {
     "then see the local rivals Google actually ranks you against. Free, no signup.",
 } as const;
 
+/** Reachable ways to get a human. Rendered on /contact and in the footer. */
+export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "ads.lazyclicks@gmail.com";
+
+/** E.164, for the tel: href — no spaces, no punctuation. */
+export const CONTACT_PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE?.trim() || "+918808804344";
+
+/** How the number is shown to a reader. Grouped for scannability. */
+export const CONTACT_PHONE_DISPLAY = "+91 88088 04344";
+
 /**
  * Where the report's closing call-to-action points.
  *
- * Set NEXT_PUBLIC_CONTACT_URL to a WhatsApp link (https://wa.me/<number>), a
- * mailto:, or a booking page. Leave it unset and the CTA button is hidden
+ * Defaults to the on-site contact page. Override with NEXT_PUBLIC_CONTACT_URL
+ * to send people straight to WhatsApp (https://wa.me/<number>), a mailto:, or a
+ * booking page instead. Set it to an empty string and the CTA button is hidden
  * entirely rather than rendering a dead link.
  */
-export const CONTACT_URL = process.env.NEXT_PUBLIC_CONTACT_URL?.trim() || "";
+export const CONTACT_URL =
+  process.env.NEXT_PUBLIC_CONTACT_URL === undefined ? "/contact" : process.env.NEXT_PUBLIC_CONTACT_URL.trim();
 
 /** The one-line pitch under the closing CTA. */
 export const CONTACT_PITCH =
